@@ -81,12 +81,43 @@ class CalculatorTest {
         calc.pressDigitKey(7);
         calc.pressDotKey();
         calc.pressDigitKey(8);
-
         String expected = "1.78";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);
     }
+
+    @Test
+    @DisplayName("should clear the screen when pressed clear")
+    void testClearScreen() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(1);
+        calc.pressClearKey();
+
+        String expected = "0";
+        String actual = calc.readScreen();
+        assertEquals(expected, actual);
+
+    }
+
+    @Test
+    @DisplayName("shows the 100th of the given number")
+    void testPercentage() {
+
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(5);
+        calc.pressUnaryOperationKey("%");
+
+        String expected = "0.05";
+        String actual = calc.readScreen();
+        assertEquals(expected, actual);
+    }
+
+
+
+
 
 
     //TODO hier weitere Tests erstellen
