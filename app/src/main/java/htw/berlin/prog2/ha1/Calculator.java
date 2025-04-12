@@ -45,10 +45,33 @@ public class Calculator {
      * im Ursprungszustand ist.
      */
     public void pressClearKey() {
-        screen = "0";
-        latestOperation = "";
-        latestValue = 0.0;
+
+        int count = 0;
+        String tempLatestOperation = "";
+        double tempLatestValue = 0.0;
+        switch (count) {
+            case 0 -> {
+                tempLatestOperation = latestOperation;
+                tempLatestValue = latestValue;
+                screen = "0";
+                count++;
+                break;
+            }
+            default -> {
+                screen = "0";
+                latestOperation = "";
+                latestValue = 0.0;
+                count++;
+            }
+        }
+        if(count == 1){
+            latestOperation = tempLatestOperation;
+            latestValue = tempLatestValue;
+        }
+
+
     }
+
 
     /**
      * Empfängt den Wert einer gedrückten binären Operationstaste, also eine der vier Operationen

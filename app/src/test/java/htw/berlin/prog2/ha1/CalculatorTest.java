@@ -88,32 +88,77 @@ class CalculatorTest {
     }
 
     @Test
-    @DisplayName("should clear the screen when pressed clear")
+    @DisplayName("should clear the screen or last digit when pressed clear")
     void testClearScreen() {
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(1);
+        calc.pressDigitKey(0);
         calc.pressClearKey();
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(1);
+        calc.pressEqualsKey();
 
-        String expected = "0";
+        String expected = "1";
         String actual = calc.readScreen();
         assertEquals(expected, actual);
 
     }
 
     @Test
-    @DisplayName("shows the 100th of the given number")
-    void testPercentage() {
+    @DisplayName("teilt die Zahl durch 100")
+    void testDivideByHundred(){
 
         Calculator calc = new Calculator();
 
-        calc.pressDigitKey(5);
+        calc.pressDigitKey(1);
         calc.pressUnaryOperationKey("%");
 
-        String expected = "0.05";
+        String expected = "0.01";
+        String actual = calc.readScreen();
+        assertEquals(expected,actual);
+    }
+
+
+    @Test
+    @DisplayName("clears screen and shows the memory")
+    void testClearScreenWithMemory() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(0);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(1);
+        calc.pressEqualsKey();
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(5);
+        calc.pressClearKey();
+        calc.pressEqualsKey();
+
+
+        String expected = "11";
         String actual = calc.readScreen();
         assertEquals(expected, actual);
+
     }
+
+    @Test
+    void testDivideByZeroInversion() {
+        Calculator calc = new Calculator();
+        calc.pressDigitKey(0);
+        calc.pressUnaryOperationKey("1/x");
+        assertEquals("Error", calc.readScreen()); // Should handle gracefully
+    }
+
+
+
+
+
+
+
+
+
+
 
 
 
