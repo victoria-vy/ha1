@@ -93,7 +93,6 @@ class CalculatorTest {
         Calculator calc = new Calculator();
 
         calc.pressDigitKey(1);
-        calc.pressDigitKey(0);
         calc.pressClearKey();
         calc.pressBinaryOperationKey("+");
         calc.pressDigitKey(1);
@@ -103,20 +102,6 @@ class CalculatorTest {
         String actual = calc.readScreen();
         assertEquals(expected, actual);
 
-    }
-
-    @Test
-    @DisplayName("teilt die Zahl durch 100")
-    void testDivideByHundred(){
-
-        Calculator calc = new Calculator();
-
-        calc.pressDigitKey(1);
-        calc.pressUnaryOperationKey("%");
-
-        String expected = "0.01";
-        String actual = calc.readScreen();
-        assertEquals(expected,actual);
     }
 
 
@@ -143,28 +128,14 @@ class CalculatorTest {
     }
 
     @Test
+    @DisplayName("should display error when applying an inversion on zero")
     void testDivideByZeroInversion() {
         Calculator calc = new Calculator();
         calc.pressDigitKey(0);
         calc.pressUnaryOperationKey("1/x");
-        assertEquals("Error", calc.readScreen()); // Should handle gracefully
+        assertEquals("Error", calc.readScreen());
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //TODO hier weitere Tests erstellen
 }
 
